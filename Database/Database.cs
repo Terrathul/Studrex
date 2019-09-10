@@ -30,7 +30,8 @@ namespace Studrex.Database
             SQLiteCommand command = databaseConnection.CreateCommand();
             command.CommandText = "CREATE TABLE IF NOT EXISTS USER(USERNAME VARCHAR(21) PRIMARY KEY, PASSWORD VARCHAR(33) NOT NULL, FIRSTNAME VARCHAR(33) NOT NULL, LASTNAME VARCHAR(77) NOT NULL, ROLE INTEGER NOT NULL)";
             command.ExecuteNonQuery();
-            command.CommandText = "CREATE TABLE IF NOT EXISTS USER(USERNAME VARCHAR(21) PRIMARY KEY, PASSWORD VARCHAR(33) NOT NULL, FIRSTNAME VARCHAR(33) NOT NULL, LASTNAME VARCHAR(77) NOT NULL, ROLE INTEGER NOT NULL)";
+            command.CommandText = "CREATE TABLE IF NOT EXISTS STUDENT(ID_NUMBER VARCHAR(7) PRIMARY KEY, NAME VARCHAR(33) NOT NULL, LASTNAME VARCHAR(33) NOT NULL, PROGRAM VARCHAR(33) NOT NULL, LEVEL VARCHAR(33) NOT NULL, YEAR INTEGER NOT NULL, PHOTO BLOB NOT NULL)";
+            command.ExecuteNonQuery();
             command.Dispose();
             databaseConnection.Close();
         }
