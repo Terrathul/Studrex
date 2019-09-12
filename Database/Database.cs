@@ -14,6 +14,25 @@ namespace Studrex.Database
 {
     static class Database
     {
+        enum Program
+        {
+            Administration = 0,
+            Business = 1,
+            Design = 2,
+            Economics = 3,
+            Finance = 4,
+            Informatics = 5,
+            Leadership = 6,
+            Management = 7,
+            Marketing = 8
+        }
+
+        enum Level
+        {
+            Undergraduate = 0,
+            Graduate = 1
+        }
+
         private const string conn = "URI=file:Studrex.db";
         public static bool DatabaseExists()
         {
@@ -161,16 +180,105 @@ namespace Studrex.Database
             }
         }
 
-        public static DataSet LoadStudents()
+        public static void LoadStudents(DataGridView dataGridView)
         {
-            string command = "SELECT PHOTO, NAME, LASTNAME, PROGRAM, LEVEL, YEAR FROM STUDENT;";
             SQLiteConnection databaseConnection = new SQLiteConnection(conn);
-            SQLiteDataAdapter adapter = new SQLiteDataAdapter(command, databaseConnection);
-            SQLiteCommandBuilder builder = new SQLiteCommandBuilder(adapter);
-            DataSet ds = new DataSet();
-            adapter.Fill(ds);
+            databaseConnection.Open();
+            SQLiteCommand command = databaseConnection.CreateCommand();
+            command.CommandText = "SELECT PHOTO, NAME, LASTNAME, PROGRAM, LEVEL, YEAR FROM STUDENT;";
+            SQLiteDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                byte[] bytefield = (System.Byte[])reader[0];
+                Image image = ByteToImage(bytefield);
+                Bitmap bmp = new Bitmap(image);
+                dataGridView.Rows.Add(bmp, reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetInt32(5));
+            }
+            databaseConnection.Close();
+        }
 
-            return ds;
+        public static Image ByteToImage(byte[] imageBytes)
+        {
+            MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
+            ms.Write(imageBytes, 0, imageBytes.Length);
+            Image image = new Bitmap(ms);
+            return image;
+        }
+
+        public static void SearchDatabase(string id, DataGridView dataGridView)
+        {
+            SQLiteConnection databaseConnection = new SQLiteConnection(conn);
+            databaseConnection.Open();
+            SQLiteCommand command = databaseConnection.CreateCommand();
+            command.CommandText = "SELECT PHOTO, NAME, LASTNAME, PROGRAM, LEVEL, YEAR FROM STUDENT WHERE ID_NUMBER = '" + id + "';";
+            SQLiteDataReader reader = command.ExecuteReader();
+            dataGridView.Rows.Clear();
+            dataGridView.Refresh();
+            while (reader.Read())
+            {
+                byte[] bytefield = (System.Byte[])reader[0];
+                Image image = ByteToImage(bytefield);
+                Bitmap bmp = new Bitmap(image);
+                dataGridView.Rows.Add(bmp, reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetInt32(5));
+            }
+            databaseConnection.Close();
+        }
+
+        public static void FilterDatabaseByProgram(int program, DataGridView dataGridView)
+        {
+            SQLiteConnection databaseConnection = new SQLiteConnection(conn);
+            databaseConnection.Open();
+            SQLiteCommand command = databaseConnection.CreateCommand();
+            command.CommandText = "SELECT PHOTO, NAME, LASTNAME, PROGRAM, LEVEL, YEAR FROM STUDENT WHERE PROGRAM = '" + (Program)program + "';";
+            SQLiteDataReader reader = command.ExecuteReader();
+            dataGridView.Rows.Clear();
+            dataGridView.Refresh();
+            while (reader.Read())
+            {
+                byte[] bytefield = (System.Byte[])reader[0];
+                Image image = ByteToImage(bytefield);
+                Bitmap bmp = new Bitmap(image);
+                dataGridView.Rows.Add(bmp, reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetInt32(5));
+            }
+            databaseConnection.Close();
+        }
+
+        public static void FilterDatabaseByLevel(int level, DataGridView dataGridView)
+        {
+            SQLiteConnection databaseConnection = new SQLiteConnection(conn);
+            databaseConnection.Open();
+            SQLiteCommand command = databaseConnection.CreateCommand();
+            command.CommandText = "SELECT PHOTO, NAME, LASTNAME, PROGRAM, LEVEL, YEAR FROM STUDENT WHERE LEVEL = '" + (Level)level + "';";
+            SQLiteDataReader reader = command.ExecuteReader();
+            dataGridView.Rows.Clear();
+            dataGridView.Refresh();
+            while (reader.Read())
+            {
+                byte[] bytefield = (System.Byte[])reader[0];
+                Image image = ByteToImage(bytefield);
+                Bitmap bmp = new Bitmap(image);
+                dataGridView.Rows.Add(bmp, reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetInt32(5));
+            }
+            databaseConnection.Close();
+        }
+
+        public static void FilterDatabaseByYear(int year, DataGridView dataGridView)
+        {
+            SQLiteConnection databaseConnection = new SQLiteConnection(conn);
+            databaseConnection.Open();
+            SQLiteCommand command = databaseConnection.CreateCommand();
+            command.CommandText = "SELECT PHOTO, NAME, LASTNAME, PROGRAM, LEVEL, YEAR FROM STUDENT WHERE YEAR = '" + year + "';";
+            SQLiteDataReader reader = command.ExecuteReader();
+            dataGridView.Rows.Clear();
+            dataGridView.Refresh();
+            while (reader.Read())
+            {
+                byte[] bytefield = (System.Byte[])reader[0];
+                Image image = ByteToImage(bytefield);
+                Bitmap bmp = new Bitmap(image);
+                dataGridView.Rows.Add(bmp, reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetInt32(5));
+            }
+            databaseConnection.Close();
         }
     }
 }

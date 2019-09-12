@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StudentRecords));
             this.studrexAddButton = new System.Windows.Forms.Button();
             this.studentDataGridView = new System.Windows.Forms.DataGridView();
-            this.photoColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.photoColumn = new System.Windows.Forms.DataGridViewImageColumn();
             this.studentName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.studentLastname = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.studentProgram = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -39,11 +39,10 @@
             this.studentYear = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.studrexSearchGroupbox = new System.Windows.Forms.GroupBox();
             this.studrexIdLabel = new System.Windows.Forms.Label();
-            this.studrexLastnameTextbox = new System.Windows.Forms.TextBox();
+            this.idsearchTextbox = new System.Windows.Forms.TextBox();
             this.studrexSearchButton = new System.Windows.Forms.Button();
             this.studrexFilterGroupbox = new System.Windows.Forms.GroupBox();
-            this.studrexFilterButton = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.studrexYearCombobox = new System.Windows.Forms.ComboBox();
             this.studrexYearLabel = new System.Windows.Forms.Label();
             this.studrexLevelCombobox = new System.Windows.Forms.ComboBox();
             this.studrexLevelLabel = new System.Windows.Forms.Label();
@@ -51,6 +50,7 @@
             this.studrexProgramLabel = new System.Windows.Forms.Label();
             this.studrexWelcomeLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.refreshButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.studentDataGridView)).BeginInit();
             this.studrexSearchGroupbox.SuspendLayout();
             this.studrexFilterGroupbox.SuspendLayout();
@@ -85,14 +85,19 @@
             this.studentDataGridView.ReadOnly = true;
             this.studentDataGridView.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.studentDataGridView.RowHeadersVisible = false;
+            this.studentDataGridView.RowTemplate.Height = 129;
             this.studentDataGridView.Size = new System.Drawing.Size(776, 329);
             this.studentDataGridView.TabIndex = 2;
             // 
             // photoColumn
             // 
+            this.photoColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
             this.photoColumn.HeaderText = "Photo";
+            this.photoColumn.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
             this.photoColumn.Name = "photoColumn";
             this.photoColumn.ReadOnly = true;
+            this.photoColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.photoColumn.Width = 129;
             // 
             // studentName
             // 
@@ -127,7 +132,7 @@
             // studrexSearchGroupbox
             // 
             this.studrexSearchGroupbox.Controls.Add(this.studrexIdLabel);
-            this.studrexSearchGroupbox.Controls.Add(this.studrexLastnameTextbox);
+            this.studrexSearchGroupbox.Controls.Add(this.idsearchTextbox);
             this.studrexSearchGroupbox.Controls.Add(this.studrexSearchButton);
             this.studrexSearchGroupbox.Location = new System.Drawing.Point(12, 27);
             this.studrexSearchGroupbox.Name = "studrexSearchGroupbox";
@@ -145,12 +150,12 @@
             this.studrexIdLabel.TabIndex = 6;
             this.studrexIdLabel.Text = "ID number:";
             // 
-            // studrexLastnameTextbox
+            // idsearchTextbox
             // 
-            this.studrexLastnameTextbox.Location = new System.Drawing.Point(68, 19);
-            this.studrexLastnameTextbox.Name = "studrexLastnameTextbox";
-            this.studrexLastnameTextbox.Size = new System.Drawing.Size(100, 20);
-            this.studrexLastnameTextbox.TabIndex = 5;
+            this.idsearchTextbox.Location = new System.Drawing.Point(68, 19);
+            this.idsearchTextbox.Name = "idsearchTextbox";
+            this.idsearchTextbox.Size = new System.Drawing.Size(100, 20);
+            this.idsearchTextbox.TabIndex = 5;
             // 
             // studrexSearchButton
             // 
@@ -160,11 +165,11 @@
             this.studrexSearchButton.TabIndex = 4;
             this.studrexSearchButton.Text = "Search";
             this.studrexSearchButton.UseVisualStyleBackColor = true;
+            this.studrexSearchButton.Click += new System.EventHandler(this.studrexSearchButton_Click);
             // 
             // studrexFilterGroupbox
             // 
-            this.studrexFilterGroupbox.Controls.Add(this.studrexFilterButton);
-            this.studrexFilterGroupbox.Controls.Add(this.comboBox1);
+            this.studrexFilterGroupbox.Controls.Add(this.studrexYearCombobox);
             this.studrexFilterGroupbox.Controls.Add(this.studrexYearLabel);
             this.studrexFilterGroupbox.Controls.Add(this.studrexLevelCombobox);
             this.studrexFilterGroupbox.Controls.Add(this.studrexLevelLabel);
@@ -177,32 +182,24 @@
             this.studrexFilterGroupbox.TabStop = false;
             this.studrexFilterGroupbox.Text = "Filter";
             // 
-            // studrexFilterButton
+            // studrexYearCombobox
             // 
-            this.studrexFilterButton.Location = new System.Drawing.Point(440, 16);
-            this.studrexFilterButton.Name = "studrexFilterButton";
-            this.studrexFilterButton.Size = new System.Drawing.Size(69, 23);
-            this.studrexFilterButton.TabIndex = 6;
-            this.studrexFilterButton.Text = "Filter";
-            this.studrexFilterButton.UseVisualStyleBackColor = true;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.studrexYearCombobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.studrexYearCombobox.FormattingEnabled = true;
+            this.studrexYearCombobox.Items.AddRange(new object[] {
             "1",
             "2",
             "3"});
-            this.comboBox1.Location = new System.Drawing.Point(394, 17);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(40, 21);
-            this.comboBox1.TabIndex = 5;
+            this.studrexYearCombobox.Location = new System.Drawing.Point(450, 14);
+            this.studrexYearCombobox.Name = "studrexYearCombobox";
+            this.studrexYearCombobox.Size = new System.Drawing.Size(40, 21);
+            this.studrexYearCombobox.TabIndex = 5;
+            this.studrexYearCombobox.SelectedIndexChanged += new System.EventHandler(this.studrexYearCombobox_SelectedIndexChanged);
             // 
             // studrexYearLabel
             // 
             this.studrexYearLabel.AutoSize = true;
-            this.studrexYearLabel.Location = new System.Drawing.Point(355, 22);
+            this.studrexYearLabel.Location = new System.Drawing.Point(412, 17);
             this.studrexYearLabel.Name = "studrexYearLabel";
             this.studrexYearLabel.Size = new System.Drawing.Size(32, 13);
             this.studrexYearLabel.TabIndex = 4;
@@ -215,15 +212,16 @@
             this.studrexLevelCombobox.Items.AddRange(new object[] {
             "Undergraduate",
             "Graduate"});
-            this.studrexLevelCombobox.Location = new System.Drawing.Point(228, 18);
+            this.studrexLevelCombobox.Location = new System.Drawing.Point(259, 15);
             this.studrexLevelCombobox.Name = "studrexLevelCombobox";
             this.studrexLevelCombobox.Size = new System.Drawing.Size(121, 21);
             this.studrexLevelCombobox.TabIndex = 3;
+            this.studrexLevelCombobox.SelectedIndexChanged += new System.EventHandler(this.studrexLevelCombobox_SelectedIndexChanged);
             // 
             // studrexLevelLabel
             // 
             this.studrexLevelLabel.AutoSize = true;
-            this.studrexLevelLabel.Location = new System.Drawing.Point(186, 22);
+            this.studrexLevelLabel.Location = new System.Drawing.Point(217, 19);
             this.studrexLevelLabel.Name = "studrexLevelLabel";
             this.studrexLevelLabel.Size = new System.Drawing.Size(36, 13);
             this.studrexLevelLabel.TabIndex = 2;
@@ -243,15 +241,16 @@
             "Leadership",
             "Management",
             "Marketing"});
-            this.studrexProgramCombobox.Location = new System.Drawing.Point(59, 17);
+            this.studrexProgramCombobox.Location = new System.Drawing.Point(73, 16);
             this.studrexProgramCombobox.Name = "studrexProgramCombobox";
             this.studrexProgramCombobox.Size = new System.Drawing.Size(121, 21);
             this.studrexProgramCombobox.TabIndex = 1;
+            this.studrexProgramCombobox.SelectedIndexChanged += new System.EventHandler(this.studrexProgramCombobox_SelectedIndexChanged);
             // 
             // studrexProgramLabel
             // 
             this.studrexProgramLabel.AutoSize = true;
-            this.studrexProgramLabel.Location = new System.Drawing.Point(6, 22);
+            this.studrexProgramLabel.Location = new System.Drawing.Point(20, 21);
             this.studrexProgramLabel.Name = "studrexProgramLabel";
             this.studrexProgramLabel.Size = new System.Drawing.Size(49, 13);
             this.studrexProgramLabel.TabIndex = 0;
@@ -276,11 +275,22 @@
             this.label1.TabIndex = 6;
             this.label1.Text = "Studrex | Student database of Pelotopia School of Business";
             // 
+            // refreshButton
+            // 
+            this.refreshButton.Location = new System.Drawing.Point(12, 415);
+            this.refreshButton.Name = "refreshButton";
+            this.refreshButton.Size = new System.Drawing.Size(75, 23);
+            this.refreshButton.TabIndex = 7;
+            this.refreshButton.Text = "Refresh";
+            this.refreshButton.UseVisualStyleBackColor = true;
+            this.refreshButton.Click += new System.EventHandler(this.refreshButton_Click);
+            // 
             // StudentRecords
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.refreshButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.studrexWelcomeLabel);
             this.Controls.Add(this.studrexFilterGroupbox);
@@ -308,23 +318,23 @@
         private System.Windows.Forms.DataGridView studentDataGridView;
         private System.Windows.Forms.GroupBox studrexSearchGroupbox;
         private System.Windows.Forms.Label studrexIdLabel;
-        private System.Windows.Forms.TextBox studrexLastnameTextbox;
+        private System.Windows.Forms.TextBox idsearchTextbox;
         private System.Windows.Forms.Button studrexSearchButton;
         private System.Windows.Forms.GroupBox studrexFilterGroupbox;
-        private System.Windows.Forms.Button studrexFilterButton;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox studrexYearCombobox;
         private System.Windows.Forms.Label studrexYearLabel;
         private System.Windows.Forms.ComboBox studrexLevelCombobox;
         private System.Windows.Forms.Label studrexLevelLabel;
         private System.Windows.Forms.ComboBox studrexProgramCombobox;
         private System.Windows.Forms.Label studrexProgramLabel;
         private System.Windows.Forms.Label studrexWelcomeLabel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn photoColumn;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridViewImageColumn photoColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn studentName;
         private System.Windows.Forms.DataGridViewTextBoxColumn studentLastname;
         private System.Windows.Forms.DataGridViewTextBoxColumn studentProgram;
         private System.Windows.Forms.DataGridViewTextBoxColumn studentLevel;
         private System.Windows.Forms.DataGridViewTextBoxColumn studentYear;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button refreshButton;
     }
 }

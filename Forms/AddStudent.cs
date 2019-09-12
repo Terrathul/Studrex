@@ -27,7 +27,7 @@ namespace Studrex.Forms
         private void studentAddButton_Click(object sender, EventArgs e)
         {
             byte[] bytefield = Database.Database.ImageToByte(studentPhotobox.Image, System.Drawing.Imaging.ImageFormat.Jpeg);
-            if(!string.IsNullOrWhiteSpace(studentFirstNameTextbox.Text) && !string.IsNullOrWhiteSpace(studentLastNameTextbox.Text) && studentProgramCombobox.SelectedIndex > -1 && studentLevelCombobox.SelectedIndex > -1 && studentYearCombobox.SelectedIndex > -1)
+            if(!string.IsNullOrWhiteSpace(photoPathTextbox.Text) && !string.IsNullOrWhiteSpace(studentFirstNameTextbox.Text) && !string.IsNullOrWhiteSpace(studentLastNameTextbox.Text) && studentProgramCombobox.SelectedIndex > -1 && studentLevelCombobox.SelectedIndex > -1 && studentYearCombobox.SelectedIndex > -1)
             {
                 Database.Database.AddStudent(studentFirstNameTextbox.Text, studentLastNameTextbox.Text, studentProgramCombobox.Text, studentLevelCombobox.Text, studentYearCombobox.SelectedIndex + 1, bytefield);
                 var selectedOption = MessageBox.Show("Do you want to add another student?", "Add another?", MessageBoxButtons.YesNo);
