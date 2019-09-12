@@ -19,7 +19,9 @@ namespace Studrex.Forms
             this.user = userParam;
             if (user.getRole() == 2)
                 this.studrexAddButton.Hide();
-            studrexWelcomeLabel.Text = "Welcome " + user.getFirstname() + " " + user.getLastName() + "!";  
+            studrexWelcomeLabel.Text = "Welcome " + user.getFirstname() + " " + user.getLastName() + "!";
+            DataSet ds = Database.Database.LoadStudents();
+            studentDataGridView.DataSource = ds.Tables[0];
         }
 
         private void StudentRecords_FormClosing(object sender, FormClosingEventArgs e)

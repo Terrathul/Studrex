@@ -36,14 +36,15 @@
             this.studentFirstNameLabel = new System.Windows.Forms.Label();
             this.studentFirstNameTextbox = new System.Windows.Forms.TextBox();
             this.studentLastnameLabel = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.studentLastNameTextbox = new System.Windows.Forms.TextBox();
             this.studentProgramLabel = new System.Windows.Forms.Label();
             this.studentProgramCombobox = new System.Windows.Forms.ComboBox();
             this.studentLevelLabel = new System.Windows.Forms.Label();
             this.studentLevelCombobox = new System.Windows.Forms.ComboBox();
             this.studentYearLabel = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.studentYearCombobox = new System.Windows.Forms.ComboBox();
             this.studentAddButton = new System.Windows.Forms.Button();
+            this.loadImageFile = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.studentPhotobox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -108,12 +109,12 @@
             this.studentLastnameLabel.TabIndex = 6;
             this.studentLastnameLabel.Text = "Last name:";
             // 
-            // textBox1
+            // studentLastNameTextbox
             // 
-            this.textBox1.Location = new System.Drawing.Point(243, 74);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(124, 20);
-            this.textBox1.TabIndex = 7;
+            this.studentLastNameTextbox.Location = new System.Drawing.Point(243, 74);
+            this.studentLastNameTextbox.Name = "studentLastNameTextbox";
+            this.studentLastNameTextbox.Size = new System.Drawing.Size(124, 20);
+            this.studentLastNameTextbox.TabIndex = 7;
             // 
             // studentProgramLabel
             // 
@@ -173,18 +174,18 @@
             this.studentYearLabel.TabIndex = 12;
             this.studentYearLabel.Text = "Year:";
             // 
-            // comboBox1
+            // studentYearCombobox
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.studentYearCombobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.studentYearCombobox.FormattingEnabled = true;
+            this.studentYearCombobox.Items.AddRange(new object[] {
             "1",
             "2",
             "3"});
-            this.comboBox1.Location = new System.Drawing.Point(243, 217);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(124, 21);
-            this.comboBox1.TabIndex = 13;
+            this.studentYearCombobox.Location = new System.Drawing.Point(243, 217);
+            this.studentYearCombobox.Name = "studentYearCombobox";
+            this.studentYearCombobox.Size = new System.Drawing.Size(124, 21);
+            this.studentYearCombobox.TabIndex = 13;
             // 
             // studentAddButton
             // 
@@ -202,13 +203,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(381, 278);
             this.Controls.Add(this.studentAddButton);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.studentYearCombobox);
             this.Controls.Add(this.studentYearLabel);
             this.Controls.Add(this.studentLevelCombobox);
             this.Controls.Add(this.studentLevelLabel);
             this.Controls.Add(this.studentProgramCombobox);
             this.Controls.Add(this.studentProgramLabel);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.studentLastNameTextbox);
             this.Controls.Add(this.studentLastnameLabel);
             this.Controls.Add(this.studentFirstNameTextbox);
             this.Controls.Add(this.studentFirstNameLabel);
@@ -237,13 +238,14 @@
         private System.Windows.Forms.Label studentFirstNameLabel;
         private System.Windows.Forms.TextBox studentFirstNameTextbox;
         private System.Windows.Forms.Label studentLastnameLabel;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox studentLastNameTextbox;
         private System.Windows.Forms.Label studentProgramLabel;
         private System.Windows.Forms.ComboBox studentProgramCombobox;
         private System.Windows.Forms.Label studentLevelLabel;
         private System.Windows.Forms.ComboBox studentLevelCombobox;
         private System.Windows.Forms.Label studentYearLabel;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox studentYearCombobox;
         private System.Windows.Forms.Button studentAddButton;
+        private System.Windows.Forms.OpenFileDialog loadImageFile;
     }
 }

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.IO;
 using System.Security.Cryptography;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
 
 namespace Studrex.Database
 {
@@ -63,6 +66,27 @@ namespace Studrex.Database
             command.ExecuteNonQuery();
             command.Dispose();
             databaseConnection.Close();
+        }
+
+        public static void AddStudent(string firstname, string lastname, string program, string level, int year, byte[] bytefield)
+        {
+            SQLiteConnection databaseConnection = new SQLiteConnection(conn);
+            databaseConnection.Open();
+            SQLiteCommand command = databaseConnection.CreateCommand();
+            command.CommandText = "INSERT INTO STUDENT VALUES('" + GenerateRandomID() + "', '" + firstname + "', '" + lastname + "', '" + program + "', '" + level + "', '" + year + "', @image);";
+            SQLiteParameter parameter = new SQLiteParameter("@image", System.Data.DbType.Binary);
+            parameter.Value = bytefield;
+            command.Parameters.Add(parameter);
+            command.ExecuteNonQuery();
+            command.Dispose();
+            databaseConnection.Close();
+        }
+
+        private static string GenerateRandomID ()
+        {
+            Random random = new Random();
+            string generatedString = random.Next(0, 9999999).ToString("D7");
+            return generatedString;
         }
 
         public static bool PasswordExists(string username, string password)
@@ -125,6 +149,28 @@ namespace Studrex.Database
             command.Dispose();
             databaseConnection.Close();
             return temp;
+        }
+
+        public static byte[] ImageToByte(Image image, System.Drawing.Imaging.ImageFormat format)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                image.Save(ms, format);
+                byte[] imageBytes = ms.ToArray();
+                return imageBytes;
+            }
+        }
+
+        public static DataSet LoadStudents()
+        {
+            string command = "SELECT PHOTO, NAME, LASTNAME, PROGRAM, LEVEL, YEAR FROM STUDENT;";
+            SQLiteConnection databaseConnection = new SQLiteConnection(conn);
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(command, databaseConnection);
+            SQLiteCommandBuilder builder = new SQLiteCommandBuilder(adapter);
+            DataSet ds = new DataSet();
+            adapter.Fill(ds);
+
+            return ds;
         }
     }
 }
